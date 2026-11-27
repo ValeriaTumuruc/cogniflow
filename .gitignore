@@ -1,0 +1,10 @@
+data/
+dist/
+__pycache__/
+*.sqlite3
+*.sqlite3-*
+.env
+.env.*
+*.csv
+*.backup
+local-backup/
