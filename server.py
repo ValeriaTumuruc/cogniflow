@@ -8,7 +8,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent
 DB = Path(os.environ.get('COGNIFLOW_DB', str(ROOT / 'data' / 'research.sqlite3')))
-STATIC = {'/config.js':('config.js','text/javascript'), '/':('index.html','text/html'), '/index.html':('index.html','text/html'), '/privacy.html':('privacy.html','text/html'), '/styles.css':('styles.css','text/css'), '/app.js':('app.js','text/javascript'), '/mark.svg':('mark.svg','image/svg+xml')}
+STATIC = {'/assets/Barlow-Bold.ttf':('assets/Barlow-Bold.ttf','font/ttf'), '/assets/Barlow-Regular.ttf':('assets/Barlow-Regular.ttf','font/ttf'), '/assets/Barlow-OFL.txt':('assets/Barlow-OFL.txt','text/plain'), '/config.js':('config.js','text/javascript'), '/':('index.html','text/html'), '/index.html':('index.html','text/html'), '/privacy.html':('privacy.html','text/html'), '/styles.css':('styles.css','text/css'), '/app.js':('app.js','text/javascript'), '/mark.svg':('mark.svg','image/svg+xml')}
 def connect():
     DB.parent.mkdir(parents=True, exist_ok=True)
     c = sqlite3.connect(DB, timeout=10)
@@ -31,7 +31,7 @@ class Handler(BaseHTTPRequestHandler):
         if config:
             api = urlsplit(config.group(1))
             if api.scheme == 'https' and re.fullmatch(r'[a-zA-Z0-9.:-]+', api.netloc): api_origin = ' https://' + api.netloc
-        self.send_header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'" + api_origin + "; frame-ancestors 'none'; base-uri 'self'; form-action 'self'")
+        self.send_header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'" + api_origin + "; frame-src https://embed.figma.com https://www.figma.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'")
         self.send_header('Cache-Control','no-store')
     def reply(self,code,data):
         payload=json.dumps(data).encode();self.send_response(code);self.headers_common();self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(payload)));self.end_headers();self.wfile.write(payload)

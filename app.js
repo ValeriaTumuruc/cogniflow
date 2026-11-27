@@ -52,3 +52,21 @@ if ($('#signup-form')) $('#signup-form').addEventListener('submit',async e=>{
 });
 if ($('#copy-code')) $('#copy-code').onclick = async()=>{try{await navigator.clipboard.writeText($('#withdrawal-code').textContent);$('#copy-code').textContent='Copied';}catch{$('#copy-code').textContent='Select and copy the code above';}};
 if ($('#withdraw-form')) $('#withdraw-form').onsubmit=async e=>{e.preventDefault();const status=$('#withdraw-status');try{await request('/api/withdraw',{token:$('#token').value.trim()});status.textContent='Withdrawal processed. Any registration matching this code has been removed.';e.target.reset();}catch(err){status.textContent=err.message;}status.focus();};
+
+if ($('#load-prototype')) $('#load-prototype').addEventListener('click', () => {
+ const stage = $('#prototype-stage');
+ const frame = document.createElement('iframe');
+ frame.src = stage.dataset.src;
+ frame.title = 'Cogniflow Figma prototype with sample study and well-being screens';
+ frame.allow = 'fullscreen';
+ frame.referrerPolicy = 'strict-origin-when-cross-origin';
+ stage.replaceChildren(frame);
+});
+const hostedRegistrationReady = Boolean(window.COGNIFLOW_CONFIG?.apiBaseUrl);
+const localPreview = ['localhost','127.0.0.1'].includes(location.hostname);
+if (!hostedRegistrationReady && !localPreview) {
+ if ($('#signup-form')) $('#signup-form').hidden = true;
+ if ($('#signup-unavailable')) $('#signup-unavailable').hidden = false;
+ if ($('#measurement')) $('#measurement').hidden = true;
+ if ($('#measurement-settings')) $('#measurement-settings').hidden = true;
+}

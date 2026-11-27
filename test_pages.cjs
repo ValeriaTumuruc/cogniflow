@@ -22,8 +22,10 @@ async function main(){
   assert(html.indexOf('config.js')<html.indexOf('app.js'));
  }
  const files=fs.readdirSync(path.join(__dirname,'dist')).sort();
- assert.deepEqual(files,['.nojekyll','app.js','config.js','index.html','mark.svg','privacy.html','styles.css'].sort());
- assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(__dirname,'styles.css'))).digest('hex'),'046e8dbc9bad2882551e0997ce242502513c05d0ef5880d93397d3f7bfb3d0ce');
- console.log('Passed: hosted API routing, local fallback, honest missing-config errors, API rejection handling, project-path links, public artifact allowlist and unchanged design.');
+ assert.deepEqual(files,['.nojekyll','app.js','assets','config.js','index.html','mark.svg','privacy.html','styles.css'].sort());
+ assert(!fs.readFileSync(path.join(__dirname,'styles.css'),'utf8').includes('Georgia'));
+ assert(!fs.readFileSync(path.join(__dirname,'index.html'),'utf8').includes('class="eyebrow"'));
+ assert(fs.existsSync(path.join(__dirname,'dist/assets/Barlow-Bold.ttf')));
+ console.log('Passed: hosted API routing, local fallback, honest missing-config errors, API rejection handling, project-path links, public artifact allowlist and sans-serif typography and clean section headings.');
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,12 +1,12 @@
 # Cogniflow on GitHub Pages
 
-The design is unchanged. This version fixes project-subdirectory links and builds a static GitHub Pages artifact. Signup, withdrawal and measurement call one configurable hosted API. GitHub Pages cannot run `server.py`.
+The supplied colour palette is retained. Headings and body use bundled Barlow sans-serif fonts, with no small headings above the main headings. The Figma prototype has a click-to-load preview and a direct link. This version fixes project-subdirectory links and builds a static GitHub Pages artifact. Signup, withdrawal and measurement call one configurable hosted API. GitHub Pages cannot run `server.py`.
 
 ## Status
 
 **The hosted backend is not connected yet.** `config.js` currently has an empty API address. On a public Pages site, signup will show an honest unavailable message rather than claim to save data. Local Python preview still works and uses its own local database. Do not recruit visitors until the live backend is configured and tested.
 
-The connected Supabase account has unrelated existing projects. No existing project was changed and no new project was created while the organisation choice is pending.
+The owner will provide a different signup service. No Supabase resources were created. A service endpoint or embed code is still needed before public registrations and conversion reporting can work.
 
 ## Publish the page
 
@@ -52,3 +52,12 @@ Retain the public URL, full-page screenshot, channel links and posting dates, ag
 Double-click `Start Cogniflow.cmd` or run `python server.py`, then open `http://127.0.0.1:8080`. While API configuration is empty, localhost uses the local Python API. Once a hosted API is configured, local preview uses that hosted API too, so do not mix test submissions with experiment data. Browser opening of `index.html` directly cannot provide local API functionality.
 
 Local checks: `python test_server.py`, `python build_site.py`, and `node test_pages.cjs` (Node.js needed only for this last developer test). These checks do not prove that an unconfigured remote backend works.
+
+
+## 27 November layout and evidence update
+
+Published URL: https://valeriatumuruc.github.io/cogniflow/ . The local refresh has not been pushed to that website. Upload these updated files and the assets folder, or use the included Pages workflow. Fonts are self-hosted with their open licence. Prototype loading contacts Figma only after the visitor clicks Load the prototype. The embedded screens show sample data.
+
+The documentation folder contains the experiment report, a full screenshot of the published page before this refresh, a screenshot of the refreshed local layout, two A5 flyer pages, three QR codes and tagged recruitment links. Flyer distribution and all measurement outcomes remain planned, not completed. The library and campus flyers use different utm_source values. Keep them separate when recording placements. Wait until signup and measurement work before running the conversion experiment.
+
+The report intentionally documents the current public state, including the non-working signup. Replace its screenshot and update its status after deploying the refresh and connecting the chosen service. On public hosts with no backend configured, the refreshed page shows that the testing list is not open, rather than accepting details it cannot store. Local preview still shows the form backed by the local server.
