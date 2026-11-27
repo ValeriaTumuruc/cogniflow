@@ -26,6 +26,9 @@ async function main(){
  assert(!fs.readFileSync(path.join(__dirname,'styles.css'),'utf8').includes('Georgia'));
  assert(!fs.readFileSync(path.join(__dirname,'index.html'),'utf8').includes('class="eyebrow"'));
  assert(fs.existsSync(path.join(__dirname,'dist/assets/Barlow-Bold.ttf')));
+ const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
+ assert(!html.includes('figma.com')); assert(!html.includes('<iframe'));
+ for(const screen of ['today','focus','checkin']) assert(fs.existsSync(path.join(__dirname,`dist/assets/prototype-${screen}.jpg`))); 
  console.log('Passed: hosted API routing, local fallback, honest missing-config errors, API rejection handling, project-path links, public artifact allowlist and sans-serif typography and clean section headings.');
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});

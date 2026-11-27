@@ -2,7 +2,7 @@
 from pathlib import Path
 import shutil
 ROOT=Path(__file__).resolve().parent
-PUBLIC=('index.html','privacy.html','styles.css','app.js','config.js','mark.svg','.nojekyll','assets/Barlow-Bold.ttf','assets/Barlow-Regular.ttf','assets/Barlow-OFL.txt')
+PUBLIC=('index.html','privacy.html','styles.css','app.js','config.js','mark.svg','.nojekyll','assets/Barlow-Bold.ttf','assets/Barlow-Regular.ttf','assets/Barlow-OFL.txt','assets/prototype-today.jpg','assets/prototype-focus.jpg','assets/prototype-checkin.jpg')
 dest=ROOT/'dist';dest.mkdir(exist_ok=True)
 for name in PUBLIC:
     (dest/name).parent.mkdir(parents=True,exist_ok=True)
